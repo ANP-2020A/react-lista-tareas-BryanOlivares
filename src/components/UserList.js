@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
-const UserList = (props)=>{
-    const complejos = ()=> {
-        console.log( 'Calculos complejos');
+import React from 'react';
+
+const UserList = () =>{
+
+    const listuser = ()=> {
+        console.log( 'Iniciando Estado');
         return [
             {
                 firstName:'Bryan',
@@ -18,53 +20,45 @@ const UserList = (props)=>{
         ];
     };
 
-    const [users, setUsers] = useState( props.users );
-    const [count, setCount] = useState(0);
+    const [users, setUsers] = React.useState( listuser );
 
-    const formatName = (user) => {
-        return user.firstName + ' ' + user.lastName;
-    };
     const handleAddUser = () => {
-        const firstName = document.querySelector('#firstName').value;
-        const lastName = document.querySelector('#lastName').value;
+        const firstname = document.querySelector('#firstname').value;
+        const lastname = document.querySelector('#lastname').value;
 
         const newUser = {
-            firstName,
-            lastName
+            firstname,
+            lastname
         };
 
-
-        //console.log('lastName', lastName);
-        setUsers((prevState)=>{
-            return [
+        setUsers((prevState)=> [
                 ...prevState,
                 newUser
-            ]
-        });
+            ]);
     };
+
     return (
-        <>
-            { count }
-            <button onClick={ () => setCount(count + 1) }>Sumar</button>
-            <button onClick={ () => setCount( 0 ) }>Resetear</button>
+        <div>
             <div>
+                <label htmlFor='name'>Nombre</label>
+                <input type='text' id='name'/>
 
-                <label htmlFor='firstName'>Nombre</label>
-                <input type='text' id='firstName'/>
+                <label htmlFor='lastname'>Apellido</label>
+                <input type='text' id='lastname'/>
 
-                <label htmlFor='lastName'>Apellido</label>
-                <input type='text' id='lastName'/>
-
-                <button onClick={handleAddUser}>Agregar</button>
+                <button onClick={ handleAddUser }>Agregar Usuario</button>
             </div>
+            <h1> Listas de usuarios ({ users.length } en total)</h1>
             <ul>
                 {
-                    users.map( ( user, index ) => {
-                        return <li key={`user-${index}`}>{ user.firstName} {user.lastName}</li>;
-                    })
+                    users.map( ( user, index ) => (
+                            <li key={ index }>{ user.firstname } { user.lastname }</li>
+                        )
+                    )
                 }
             </ul>
-        </>
+        </div>
     );
+
 }
 export default UserList;

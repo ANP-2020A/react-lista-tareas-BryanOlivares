@@ -2,12 +2,15 @@ import React, {useState} from 'react';
 import logo from '../images/logo.svg';
 import '../styles/App.css';
 import UserList from "./UserList";
+import TodoList from "./UserList";
 
 
-const App = (props) => {
-
-    return <UserList users={ props.users } />
-};
+const App = () => (
+    <>
+        <UserList />
+        <TodoList />
+    </>
+);
 
 
 export default App;
